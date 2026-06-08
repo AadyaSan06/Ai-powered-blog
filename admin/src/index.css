@@ -1,0 +1,13 @@
+#root, html, :root {
+    background-color: #ffe4e1 !important;
+}
+
+div {
+    /* If any container is secretly white, this will unmask it */
+    background-color: transparent; 
+}
+
+/* Except explicit interactive elements */
+input, textarea, select, button, .sidebar, .navbar {
+    background-color: ffb6c1; 
+}

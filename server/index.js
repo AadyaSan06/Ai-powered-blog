@@ -4,26 +4,36 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import blogRouter from './routes/blogRoute.js';
 
-dotenv.config(); // This loads your .env file
+// Load environment variables from .env file
+dotenv.config(); //
 
 const app = express();
-app.use(express.json());
-app.use(cors()); // Allows your frontend to talk to your backend
+app.use(express.json()); //
+app.use(cors()); // Allows frontend to make requests to the backend server
 
 // Database Connection
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("DB Connected"))
-    .catch((err) => console.log("DB connection error:", err));
+// Fallback to local MongoDB instance if process.env.MONGODB_URI is undefined
+const dbURI = process.env.MONGODB_URI || "mongodb://localhost:27017/quick-blog";
 
+mongoose.connect(dbURI)
+    .then(() => console.log(`DB Connected successfully to: ${dbURI}`))
+    .catch((err) => {
+        console.error("DB connection error:", err);
+        process.exit(1); // Stop the server cleanly on critical connection failures
+    });
+
+// Basic Root Test Route
 app.get('/', (req, res) => {
-    res.send("API is working!");
+    res.send("API is working!"); //
 });
 
-app.use("/api/blog", blogRouter);
+// Main Blog API Routes
+app.use("/api/blog", blogRouter); //
 
-app.use("/images", express.static('uploads'));
+// Serving static uploaded image files via the /images route
+app.use("/images", express.static('uploads')); //
 
-
+// Start Server
 app.listen(4000, () => {
-    console.log("Server started on http://localhost:4000");
+    console.log("Server started on http://localhost:4000"); //
 });

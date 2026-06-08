@@ -2,5 +2,11 @@
   display: flex;
   align-items: flex-start;
   min-height: 100vh;
-  background-color: #e38c8c; /* This will help you see the white boxes */
+  background-color: #e38c8c !important; /* This will help you see the white boxes */
+}
+body{
+  background-color: #e38c8c !important;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }

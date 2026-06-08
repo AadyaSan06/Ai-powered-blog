@@ -23,7 +23,7 @@ const BlogDisplay = ({ category }) => {
       <div className="blog-display-list">
         {blog_list.map((item, index) => {
           if (category === "All" || category === item.category) {
-            return <BlogItem key={index} id={item._id} name={item.name} description={item.description} image={item.image} />
+            return <BlogItem key={index} id={item._id} name={item.title} description={item.description} image={item.image} />
           }
         })}
       </div>
